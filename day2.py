@@ -1,18 +1,20 @@
 import re
 
+
 def get_input(file_name):
-    with open(file_name,'r') as file:
+    with open(file_name, 'r') as file:
         for line in file:
             yield line
+
 
 def summary(data):
     total = 0
     red_limit = 12
     blue_limit = 14
     green_limit = 13
-    pattern = '(\d* red)|(\d* blue)|(\d* green)'
+    pattern = r'(\d* red)|(\d* blue)|(\d* green)'
     for line in data:
-        #First half is game id, second is game
+        # First half is game id, second is game
         line = line.split(':')
         for game in line[1].split(';'):
             red = re.sub('\D*', '', str(re.search(pattern,game).group(1)))
@@ -35,6 +37,7 @@ def summary(data):
         print('worked')
         total += int(re.sub('\D*','',line[0]))
     return total
+
 
 def summary2(data):
     total = 0
@@ -88,5 +91,5 @@ def summary3(data):
 
 if __name__ == '__main__':
     test = list(get_input('txt2.txt'))
-    #print(summary(test))
+    print(summary(test))
     print(summary3(test))

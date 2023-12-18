@@ -13,9 +13,9 @@ def replace(data):
 
 def summary(data):
     for line in data:
-        mat1 = re.search('\d',line)
+        mat1 = re.search(r'\d',line)
         if mat1:
-            mat2 = re.search('\d',line[::-1])
+            mat2 = re.search(r'\d',line[::-1])
             mat1 = mat1.group(0) + mat2.group(0)
         else:
             mat1 = '0'
