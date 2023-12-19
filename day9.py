@@ -18,7 +18,7 @@ def get_root(listy):
         return [roots] + get_root(roots)
 
 diff = 0
-[for line in roots.reverse()]
+#[for line in roots.reverse()]
 def extrapolate(last_num, roots):
     roots.reverse()
     diff = 0

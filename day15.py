@@ -1,42 +1,39 @@
 import re
-import numpy as np
-
 
 # Hashing Algorithm
-def get_hasd(line):
+def get_hash(line):
     total = 0
     for let in line:
         total = (total+ord(let)) * 17 % 256
     return int(total)
 
 
-print('part 1:',sum([get_hasd(x)
+print('part 1:',sum([get_hash(x)
          for x in open('txt15.txt').readlines() for x in x.strip().split(',')]))
 
 
 # Part 2
-box = [{} for i in range(256)]
-u = lambda a: int(get_hasd(a))
-#print( [ box[u(line)].append((line[:2],int(line[3]))) if line[2] == '=' else box[u(line))].remove(line[:2])  for x in open('test.txt').readlines() for line in x.strip().split(',')] )
+box = [{} for i in range(256)]  # 256 Dictionaries
+f = lambda a: int(get_hash(a))
 
 for x in open('txt15.txt'):
     for line in x.strip().split(','):
         if '=' in line:
-            line = re.split(r'[=-]', line,1)
-            #print(box[u(line)])
-            box[u(line[0])][line[0]] = int(line[1])
+            line = re.split(r'[=-]', line, 1)
+            box[f(line[0])][line[0]] = int(line[1])
         else:
-            line = re.split(r'[=-]', line,1)
-            if box[u(line[0])].get(line[0]):
-                box[u(line[0])].pop(line[0])
-#print(box)
+            line = re.split(r'[=-]', line, 1)
+            if box[f(line[0])].get(line[0]):
+                box[f(line[0])].pop(line[0])
 
 total = 0
-for counter,x  in enumerate(box):
+for counter, x  in enumerate(box):
     counter +=1
-    for keys, val in enumerate(x.values()):
-        keys +=1
-        #print(counter * keys * val)
-        total += (counter * keys * val)
+    for val_count, val in enumerate(x.values()):
+        val_count +=1
+        total += (counter * val_count * val)
 
 print('part 2:',total)
+
+print('Part 1 :', sum([(val:=0) or [val:=(val+ord(c))*17%256 for c in s] and val
+                       for s in open('txt15.txt').read().strip().split(',') ]) )

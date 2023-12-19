@@ -7,7 +7,7 @@ board = [line.strip() for line in open('test.txt').readlines()]
 stars = []
 [ [stars.append((row,x.span()[0])) for x in re.finditer('#',line)] for row, line in enumerate(board)]
 
-x_cord, y_cord = zip(*[(x,y) for x, line in enumerate(open('test.txt'))
+x_cord, y_cord = zip(*[(x,y) for x, line in enumerate(open('txt11.txt'))
                   for y, c in enumerate(line) if c == '#'])
 
 
